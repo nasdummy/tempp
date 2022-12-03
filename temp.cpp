@@ -115,7 +115,8 @@ int main (){
                 		break;
                 	case 2 :
                 		cout<<"Masukkan Nilai : "; cin >> input;
-                		tambahDiTengah(data, input);
+                        cout << "Dimasukkan setelah angka : "; cin >> data;
+                		tambahDiTengah(input, data);
                 		cout<<"Nilai "<<input<< " berhasil ditambahkan di tengah..."<<endl;
                 		cout<<endl;
                 		getch();
@@ -131,6 +132,7 @@ int main (){
                 		cout<<"Tidak ada dalam pilihan"<<endl;
             		}
 				}
+                break;
             case 3:
             	hapusDiDepan();
                 cout<<endl;
