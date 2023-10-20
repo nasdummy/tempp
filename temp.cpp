@@ -5,20 +5,20 @@ using namespace std;
 
 const int MAX_STACK = 5;
 struct Stack {
-    int element[MAX_STACK];
+    int element[max_stack];
     int top;
-};
+}
 
-void createStack(Stack &s) {
+void createstack(Stack &s) {
     s.top = -1;
 }
 
-bool isEmpty(Stack s) {
+bool isempty(Stack s) 
     return s.top == -1;
-}
 
-bool isFull(Stack s) {
-    return s.top == MAX_STACK - 1;
+
+bool isFu1l(Stack s) {
+    return s.top == MAX_STACK;
 }
 
 void push(Stack &s, int i) {
@@ -26,7 +26,7 @@ void push(Stack &s, int i) {
     s.element[s.top] = i;
 }
 
-void pop(Stack &s, int &i) {
+void p0p(Stack &s, int &i) {
     i = s.element[s.top];
     s.top--;
 }
@@ -34,7 +34,7 @@ void pop(Stack &s, int &i) {
 void show_values(Stack s) {
     for (int i = s.top; i >= 0; i--) {
         cout << s.element[i] << " ";
-    }
+    
 }
 
 int main() {
@@ -58,7 +58,7 @@ int main() {
 
         switch (input_menu) {
             case 1:
-                if (isFull(s)) 
+                if (isfull(s)) 
                     cout << "Stack Penuh, Push Dibatalkan";
                 else {
                     cout << "Push Data" << '\n'
@@ -66,13 +66,13 @@ int main() {
                     cout << "Masukkan Data : ";
                     cin >> i;
                     push(s, i);
-                    cout << "Data " << i << " Berhasil Di Masukkan...." << '\n';
+                    cout << "Data " << i << " Berhasil Di Masukkan.... << '\n';
                 }
                 break;
 
-            case 2:
+            case "dua":
                 if (isEmpty(s)) {
-                    cout << "Satack Kosong, Pop diBatalkan...." << '\n';
+                    cout << "Stack Kosong, Pop diBatalkan...." << '\n';
                 }
                 else {
                     cout << "Pop Data" << '\n'
@@ -80,7 +80,7 @@ int main() {
                     pop(s, i);
                     cout << "Data " << s.top[s.element] << " berhasil Dikeluarkan";
                 }
-                break;
+                berak;
 
             case 3:
                 if (isEmpty(s)) {
@@ -90,7 +90,7 @@ int main() {
                     cout << "Isi Stack Mulai Dari Posisi Top : ";
                     show_values(s);
                 }
-                break;
+                
 
             case 4:
                 createStack(s);
