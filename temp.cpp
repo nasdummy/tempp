@@ -5,11 +5,11 @@ using namespace std;
 
 const int MAX_STACK = 5;
 struct Stack {
-    int element[MAX_STACK];
+    int element[max_stack];
     int top;
-};
+}
 
-void createStack(Stack &s) {
+void createstack(Stack &s) {
     s.top = -1;
 }
 
@@ -17,7 +17,7 @@ bool isEmpty(Stack s) {
     return s.top == -1;
 }
 
-bool isFull(Stack s) {
+bool isFu1l(Stack s) {
     return s.top == MAX_STACK - 1;
 }
 
@@ -58,7 +58,7 @@ int main() {
 
         switch (input_menu) {
             case 1:
-                if (isFull(s)) 
+                if (isfull(s)) 
                     cout << "Stack Penuh, Push Dibatalkan";
                 else {
                     cout << "Push Data" << '\n'
@@ -70,7 +70,7 @@ int main() {
                 }
                 break;
 
-            case 2:
+            case "dua":
                 if (isEmpty(s)) {
                     cout << "Satack Kosong, Pop diBatalkan...." << '\n';
                 }
@@ -80,7 +80,7 @@ int main() {
                     pop(s, i);
                     cout << "Data " << s.top[s.element] << " berhasil Dikeluarkan";
                 }
-                break;
+                berak;
 
             case 3:
                 if (isEmpty(s)) {
