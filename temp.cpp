@@ -1,188 +1,111 @@
 #include <iostream>
-#include <conio.h> // klo pake getch()
+#include <conio.h>
+#include <stdlib.h>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *next;
+const int MAX_STACK = 5;
+struct Stack {
+    int element[MAX_STACK];
+    int top;
 };
-Node *n = NULL, *head = NULL, *tail = NULL, *x = NULL;
 
-void buatNodeAwal(int i)
-{ // create new node
-    n = new Node;
-    n->data = i;
-    tail = n;
-    head = n;
-    tail->next = NULL;
+void createStack(Stack &s) {
+    s.top = -1;
 }
 
-void tambahDiBelakang(int i)
-{ // add on back
-    n = new Node;
-    n->data = i;
-    tail->next = n;
-    tail = n;
-    tail->next = NULL;
+bool isEmpty(Stack s) {
+    return s.top == -1;
 }
 
-void tambahDiDepan(int i)
-{ // add on front
-    n = new Node;
-    n->data = i;
-    n->next = head;
-    head = n;
+bool isFull(Stack s) {
+    return s.top == MAX_STACK - 1;
 }
 
-void tambahDiTengah(int i, int j)
-{ // add in the middle
-    x = head;
-    while (x->data != j)
-        x = x->next;
-    n = new Node;
-    n->data = i;
-    n->next = x->next;
-    x->next = n;
+void push(Stack &s, int i) {
+    s.top++;
+    s.element[s.top] = i;
 }
 
-void hapusDiDepan()
-{ // delete on front
-    x = head;
-    head = head->next;
-    delete (x);
+void pop(Stack &s, int &i) {
+    i = s.element[s.top];
+    s.top--;
 }
 
-void hapusDiBelakang()
-{ // delete on back
-    x = head;
-    while (x->next != tail)
-        x = x->next;
-    tail = x;
-    delete (x->next);
-    tail->next = NULL;
-}
-
-void hapusDiTengah(int i)
-{ // delete in the middle
-    Node *temp = NULL;
-    x = head;
-    while (x->data != i)
-    {
-        temp = x;
-        x = x->next;
-    }
-    temp->next = x->next;
-    delete (x);
-}
-
-void tampilData()
-{ // print data
-    x = head;
-    while (x != NULL)
-    {
-        cout << x->data << " ";
-        x = x->next;
+void show_values(Stack s) {
+    for (int i = s.top; i >= 0; i--) {
+        cout << s.element[i] << " ";
     }
 }
 
-int main()
-{
-    Node i;
-    int pilihan, pilih, i;
+int main() {
+    int input_menu;
+    int i;
+    Stack s;
+    createStack(s);
 
-    do
-    {
-        cout << "Menu:" << endl;
-        cout << "1. Buat Node Awal" << endl;
-        cout << "2. Tambah Node" << endl;
-        cout << "3. Hapus Node" << endl;
-        cout << "4. Tampil Data" << endl;
-        cout << "5. Keluar" << endl;
-        cout << "Masukkan Pilihan [1..5]: ";
-        cin >> pilihan;
+    while (true) {
+        system("cls");
+        cout << "Implementasi Stack dengan Array" << '\n'
+             << "===============================" << '\n'
+             << "Menu: " << '\n'
+             << "1. Push Data" << '\n'
+             << "2. Pop Data" << '\n'
+             << "3. Tampil Isi Stack" << '\n'
+             << "4. Kosongkan Stack" << '\n'
+             << "5. Keluar" << '\n';
+        cout << "Masukkan Pilihan [1..5] : "; cin >> input_menu;
+        system("cls");
 
-        switch (pilihan)
-        {
-        case 1:
-
-            cout << "Buat Node Baru" << endl;
-            cout << "==============" << endl;
-            cout << "Masukkan Nilai";
-            cin >> i;
-            cout << "Nilai" << i << "berhasil dimasukkan di node awal" << endl;
-            buatNodeAwal(i);
-
-            getch();
-            break;
-
-        case 2:
-            cout << "1. Tambah Node di depan" << endl;
-            cout << "2. Tambah Node di belakang" << endl;
-            cout << "3. Tambah Node di tengah" << endl;
-            switch (pilih)
-            {
+        switch (input_menu) {
             case 1:
-                cout << "Tambah node di depan" << endl;
-                cout << "====================" << endl;
-                cout << "\n";
-                cout << "Masukkan Nilai: ";
-                cin >> i;
-                cout << "Nilai" << i << "berhasil dimasukkan di node depan" << endl;
-                tambahDiDepan(i);
+                if (isFull(s)) 
+                    cout << "Stack Penuh, Push Dibatalkan";
+                else {
+                    cout << "Push Data" << '\n'
+                        << "===========" << '\n';
+                    cout << "Masukkan Data : ";
+                    cin >> i;
+                    push(s, i);
+                    cout << "Data " << i << " Berhasil Di Masukkan...." << '\n';
+                }
+                break;
+
             case 2:
-                cout << "Tambah node di belakang" << endl;
-                cout << "=======================" << endl;
-                cout << "\n";
-                cout << "Masukkan Nilai: ";
-                cin >> i;
-                cout << "Nilai" << i << "berhasil dimasukkan di node belakang" << endl;
-                tambahDiBelakang(i);
+                if (isEmpty(s)) {
+                    cout << "Satack Kosong, Pop diBatalkan...." << '\n';
+                }
+                else {
+                    cout << "Pop Data" << '\n'
+                        << "============" << '\n';
+                    pop(s, i);
+                    cout << "Data " << s.top[s.element] << " berhasil Dikeluarkan";
+                }
+                break;
+
             case 3:
-                cout << "Tambah node di tengah" << endl;
-                cout << "=====================" << endl;
-                cout << "\n";
-                cout << "Masukkan Nilai: ";
-                cin >> i;
-                cout << "Nilai" << i << "berhasil dimasukkan di node tengah" << endl;
-                int tempp;
-                cout << "Masukkan posisi node (nilai node yg sudah ada) : ";
-                cin >> tempp;
-                tambahDiTengah(i, tempp); // tambah  ditengan ada 2 parameternya.
+                if (isEmpty(s)) {
+                    cout << "Stack Masih Kosong" << '\n';
+                }
+                else {
+                    cout << "Isi Stack Mulai Dari Posisi Top : ";
+                    show_values(s);
+                }
+                break;
+
+            case 4:
+                createStack(s);
+                cout << "Stack Berhasil Dikosongkan";
+                break;
+
+            case 5:
+                return 0;
+                break;
+
+            default:
+                cout << "Pilihan tidak ada, masukan pilihan sesuai dengan daftar" << '\n';
+                break;
             }
             getch();
-            break;
-        case 3:
-            cout << "1. Hapus Node di depan" << endl;
-            cout << "2. Hapus Node di belakang" << endl;
-            cout << "3. Hapus Node di tengah" << endl;
-            switch (pilih)
-            {
-            case 1:
-                hapusDiDepan();
-                cout << "Node berhasil di hapus";
-            case 2:
-                hapusDiBelakang();
-                cout << "Node berhasil di hapus";
-            case 3:
-                hapusDiTengah(i);
-                cout << "Node berhasil di hapus";
-            }
-            getch();
-            break;
-
-        case 4:
-            tampilData();
-            getch();
-            break;
-
-        case 5:
-            cout << "sistem keluar" << endl;
-
-            return 0;
         }
-    }
-
-    while (pilih >= 1 && pilih <= 5);
-    getch();
+    return 0;
 }
